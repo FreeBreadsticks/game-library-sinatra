@@ -1,6 +1,17 @@
 <center><h1 style="color: white">Welcome, <%= @user.username.capitalize %> </h1>
 
   <h2>Your Games: </h2>
+  <div style="border: 3px solid white; width: 450px; align: center; padding: 10px; margin: 5px;">
+    <% if @user.games.empty? %>
+      <h3 style="color: red">You have No Games :(</h3>
+    <% else %>
+      <% @user.games.each do |game| %>
+        <h3 style="color: white"><%= game.title %></h3>
+        <h4 style="color: yellow"><%= game.rating %></h4>
+        <p><%= game.notes %></p>
+      <% end %>
+    <% end %>
+  </div>
 
 
 

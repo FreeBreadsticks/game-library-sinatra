@@ -11,14 +11,15 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       redirect '/signup'
     end
-    @user = User.create(:username => params[:username], :password => params[:password])
+    @user = User.create(:username => params[:username].downcase, :password => params[:password])
     session[:id] = @user.id
     redirect '/'
   end
 
   get '/login' do
     if logged_in?
-      redirect '/'
+      @user = User.find_by_id(session[:id])
+      redirect "/games/#{@user.slug}"
     end
     erb :'users/login'
   end
@@ -27,10 +28,27 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect '/'
+      redirect "/games/#{@user.slug}"
     else
-      redirect '/signup'
+      redirect "/signup"
     end
   end
-  
+
+  get '/games/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    if @user
+      erb :'users/library'
+    else
+      redirect '/'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/'
+    end
+    redirect '/'
+  end
+
 end

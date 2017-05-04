@@ -1,4 +1,4 @@
-<center><h1 style="color: white">Welcome, <%= @user.username.capitalize %> </h1>
+<center><h1 style="color: white"><img src="https://s-media-cache-ak0.pinimg.com/originals/96/4c/f1/964cf112c8928c7c75312f7f15e6b1e0.png" style="height:50px;">Welcome, <%= @user.username.capitalize %><img src="https://s-media-cache-ak0.pinimg.com/originals/96/4c/f1/964cf112c8928c7c75312f7f15e6b1e0.png" style="height:50px;"></h1>
 
   <h2>Your Games: </h2>
   <div style="border: 3px solid white; width: 450px; align: center; padding: 10px; margin: 5px;">
@@ -9,11 +9,12 @@
         <h3 style="color: white"><%= game.title %></h3>
         <h4 style="color: yellow"><%= game.rating %></h4>
         <p><%= game.notes %></p>
+        <a href="/games/<%= game.id %>/edit">Edit Game</a>
       <% end %>
     <% end %>
   </div>
 
 
 
-<h4> <a href="#">Add Game</a> // <a href="#">Community Games</a> // <a href="/logout">Logout</a> </h4>
+<h4> <a href="#">Add Game</a> // <a href="#">Community Games</a> // <a href="/logout">Logout</a> // <a href="/">Home</a></h4>
 </center>

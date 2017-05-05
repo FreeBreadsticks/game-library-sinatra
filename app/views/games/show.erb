@@ -4,7 +4,7 @@
   <h3 style="color: goldenrod">* <%= @game.rating %> *</h4>
   <h3 style="color: darkslategray"><%= @game.notes %></h3>
   <% if current_user == @game.user %>
-    <a href="/games/<%= @game.id %>/edit">Edit Game</a>
+    <a href="/games/<%= @game.id %>/edit">Edit Game</a> // <a href="/games/<%= @game.id %>/delete">Delete Game</a>
   <% end %>
 <br>
 <br>

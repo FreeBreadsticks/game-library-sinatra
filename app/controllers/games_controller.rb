@@ -7,7 +7,8 @@ class GamesController < ApplicationController
   end
 
   post '/games/new' do
-    if params[:title] == "" || params[:notes] == ""
+    binding.pry
+    if params[:title] == "" || params[:notes] == "" || params[:rating] == ""
       redirect '/games/new'
     end
     @user = current_user
@@ -45,6 +46,16 @@ class GamesController < ApplicationController
   get '/games/:id' do
     @game = Game.find_by_id(params[:id])
     erb :'games/show'
+  end
+
+  delete '/games/:id/delete' do
+    @game = Game.find(params[:id])
+    if @game.user == current_user
+      @game.destroy
+      redirect "/users/#{@game.user.slug}"
+    else
+      redirect "/games/#{@game.id}"
+    end
   end
 
 end

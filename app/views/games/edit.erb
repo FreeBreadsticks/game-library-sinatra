@@ -13,6 +13,11 @@
       <p><input type="submit" name="" value="Edit Game"></p>
     </form>
   </div>
+  <h3>Delete <%= @game.title %></h3>
+  <form class="" action="/games/<%= @game.id %>/delete" method="post">
+    <input id = "hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" name="" value="Delete Game">
+  </form>
 
   <h4> <a href="/login">My Games</a> // <a href="/logout">Logout</a> // <a href="/">Home</a></h4>
 </center>

@@ -7,8 +7,7 @@ class GamesController < ApplicationController
   end
 
   post '/games/new' do
-    binding.pry
-    if params[:title] == "" || params[:notes] == "" || params[:rating] == ""
+    if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
       redirect '/games/new'
     end
     @user = current_user
@@ -32,6 +31,9 @@ class GamesController < ApplicationController
 
   post '/games/:id/edit' do
     @game = Game.find_by_id(params[:id])
+    if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
+      redirect "/games/#{@game.id}/edit"
+    end
     @game.title = params[:title]
     @game.notes = params[:notes]
     @game.save

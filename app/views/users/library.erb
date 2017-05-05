@@ -8,9 +8,9 @@
       </div>
     <% else %>
       <% @user.games.each do |game| %>
-        <div style="border: 3px solid white; width: 450px; align: center; padding: 10px; margin: 8px;">
-          <h2 style="color: red"><%= game.title %></h3>
-            <h3 style="color: goldenrod">* <%= game.rating %> *</h4>
+        <div style="border: 3px solid white; width: 450px; align: center; padding: 10px; margin: 8px; background-color:rgba(63, 127, 191, 0.40);">
+          <h2 style="color: darkred"><%= game.title %></h3>
+            <h3 style="color: yellow">* <%= game.rating %> *</h4>
           <p><%= game.notes %></p>
           <a href="/games/<%= game.id %>/edit">Edit Game</a>
           </div>

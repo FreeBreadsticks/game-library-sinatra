@@ -1,0 +1,12 @@
+<center><h1 style="color: white"><img src="https://s-media-cache-ak0.pinimg.com/originals/96/4c/f1/964cf112c8928c7c75312f7f15e6b1e0.png" style="height:50px;">Community Games<img src="https://s-media-cache-ak0.pinimg.com/originals/96/4c/f1/964cf112c8928c7c75312f7f15e6b1e0.png" style="height:50px;"></h1>
+  <% @games.each do |game| %>
+  <div style="border: 3px solid white; width: 450px; align: center; padding: 10px; margin: 8px;">
+    <h2 style="color: darkslategrey"><%= game.title %></h2>
+    <h3>- <%= game.user.username %> -</h3>
+    <h3 style="color: goldenrod">* <%= game.rating %> *</h4>
+    <a href="/games/<%= game.id %>">View Game Details</a>
+    </div>
+  <% end %>
+
+  <h4> <a href="/login">My Games</a> // <a href="/logout">Logout</a> // <a href="/">Home</a></h4>
+</center>

@@ -18,8 +18,8 @@ class UsersController < ApplicationController
 
   get '/login' do
     if logged_in?
-      @user = User.find_by_id(session[:id])
-      redirect "/games/#{@user.slug}"
+      @user = current_user
+      redirect "/users/#{@user.slug}"
     end
     erb :'users/login'
   end
@@ -28,13 +28,13 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect "/games/#{@user.slug}"
+      redirect "/users/#{@user.slug}"
     else
       redirect "/signup"
     end
   end
 
-  get '/games/:slug' do
+  get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     if @user
       erb :'users/library'

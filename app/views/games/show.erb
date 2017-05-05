@@ -1,0 +1,14 @@
+<center>
+  <h1 style="color: steelblue"><%= @game.title %></h1>
+  <h2 style="color: red">Owner: <%= @game.user.username.capitalize %></h2>
+  <h3 style="color: goldenrod">* <%= @game.rating %> *</h4>
+  <h3 style="color: darkslategray"><%= @game.notes %></h3>
+  <% if current_user == @game.user %>
+    <a href="/games/<%= @game.id %>/edit">Edit Game</a>
+  <% end %>
+<br>
+<br>
+<br>
+<br>
+  <h4> <a href="/games">Community Games</a> // <a href="/logout">Logout</a> // <a href="/">Home</a></h4>
+</center>

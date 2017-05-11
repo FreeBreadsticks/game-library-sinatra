@@ -3,8 +3,8 @@
   <h3>Keep track of your game library the easy way!</h3>
   <div style="border: 3px solid white; width: 450px; align: center; padding: 10px;">
     <form class="" action="/signup" method="post">
-      <h4>Username: <input type="text" name="username" value=""></h4>
-      <h4>Password: <input type="text" name="password" value=""></h4>
+      <h4>Username: <input required type="text" name="username" value="<%= @user.username %>"></h4>
+      <h4>Password: <input required type="password" name="password" value=""></h4>
       <input type="submit" name="" value="Create User">
     </form>
   </div>

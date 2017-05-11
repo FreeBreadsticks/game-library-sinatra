@@ -1,7 +1,8 @@
 <center>
   <h1>Edit <%= @game.title %></h1>
   <div style="border: 3px solid white; width: 450px; align: center; padding: 10px;">
-    <form class="" action="/games/<%= @game.id %>/edit" method="post">
+    <form class="" action="/games/<%= @game.id %>" method="post">
+      <input id = "hidden" type="hidden" name="_method" value="put">
       <h4>Title: <input type="text" name="title" value="<%= @game.title %>"></h4>
       <h4>Notes/Description: </h4>
       <p><textarea name="notes" rows="5" cols="50"><%= @game.notes %></textarea></p>

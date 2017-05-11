@@ -6,15 +6,16 @@ class GamesController < ApplicationController
       erb :'games/create_game'
   end
 
-  post '/games/new' do
-    if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
+  post '/games' do
+    #if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
+      #redirect '/games/new'
+    #end
+    @game = current_user.games.build(:title => params[:title], :notes => params[:notes], :rating => params[:rating])
+    if @game.save
+      redirect "/users/#{current_user.slug}"
+    else
       redirect '/games/new'
     end
-    @user = current_user
-    @game = Game.create(:title => params[:title], :notes => params[:notes], :rating => params[:rating])
-    @game.user = @user
-    @game.save
-    redirect "/users/#{@user.slug}"
   end
 
   get '/games/:id/edit' do
@@ -28,16 +29,22 @@ class GamesController < ApplicationController
 
   end
 
-  post '/games/:id/edit' do
+  put '/games/:id' do
     @game = Game.find_by_id(params[:id])
-    if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
-      redirect "/games/#{@game.id}/edit"
+    #if params[:title] == "" || params[:notes] == "" || params[:rating] == nil
+      #redirect "/games/#{@game.id}/edit"
+    #end
+    if @game && @game.user == current_user
+      if @game.update(params)
+        redirect "/users/#{current_user.slug}"
+      else
+        # game did not update
+        redirect "/games/#{@game.id}/edit"
+      end
+    else
+      # you are not the owner hands off
+      redirect "/games"
     end
-    @game.title = params[:title]
-    @game.notes = params[:notes]
-    @game.rating = params[:rating]
-    @game.save
-    redirect "/users/#{@game.user.slug}"
   end
 
   get '/games' do
@@ -52,7 +59,7 @@ class GamesController < ApplicationController
 
   delete '/games/:id/delete' do
     @game = Game.find(params[:id])
-    if @game.user == current_user
+    if @game && @game.user == current_user
       @game.destroy
       redirect "/users/#{@game.user.slug}"
     else
